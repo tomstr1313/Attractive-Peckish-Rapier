@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
+    public Player player;
     public float speed;
 
     private void Start()
@@ -32,9 +33,19 @@ public class PlayerMovement : MonoBehaviour
                 transform.GetChild(0).transform.SetParent(null);
             }
 
-
-            Debug.Log("Item Collision");
             collision.gameObject.transform.SetParent(this.transform);
+            player.playerType = transform.GetChild(0).GetComponent<Item>().itemType;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Target")
+        {
+            if (collision.gameObject.GetComponent<Target>().npcType == player.playerType)
+            {
+                collision.gameObject.SetActive(false);
+            }
         }
     }
 }
