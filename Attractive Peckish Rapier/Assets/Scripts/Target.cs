@@ -5,15 +5,16 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public NPCTypes npcType;
-    
-    void Start()
+    public int id;
+
+    public void SetValues(int id, NPCTypes type)
     {
-        
+        this.id = id;
+        npcType = type;
     }
 
-    // Update is called once per frame
-    void Update()
+    public string ToString()
     {
-        
+        return "Target - id: " + id + " of type: " + npcType;
     }
 }
